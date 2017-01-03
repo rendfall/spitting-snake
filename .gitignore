@@ -1,0 +1,11 @@
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Ignore NodeJS modules
+/node_modules/
+/npm-debug.log
+
+# Ignore bundle files
+/dist/
