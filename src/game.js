@@ -1,16 +1,43 @@
 const CONFIG = {
+    INITIAL_SPEED: 1000,
     MAP_SIZE: 20
 }
 
 class Game {
     constructor($root) {
         this.$root = $root;
+        this.speed = CONFIG.INITIAL_SPEED;
 
         this.setupBoard();
+        this.start();
     }
 
     setupBoard() {
         let board = this.board = new Board(CONFIG.MAP_SIZE);
+    }
+
+    loop() {
+        console.log('loop', this);
+    }
+
+    start() {
+        let ts = Date.now();
+        let game = this;
+
+        (function step() {
+            let delta = (Date.now() - ts);
+
+            if (delta >= game.speed) {
+                ts = Date.now();
+                game.loop();
+            }
+
+            game.loopID = window.requestAnimationFrame(step);
+        })();
+    }
+
+    stop() {
+        window.cancelAnimationFrame(this.loopID);
     }
 }
 
