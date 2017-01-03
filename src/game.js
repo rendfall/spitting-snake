@@ -9,6 +9,8 @@ class Game {
         this.speed = CONFIG.INITIAL_SPEED;
 
         this.setupBoard();
+        this.setupSnake();
+
         this.start();
     }
 
@@ -16,8 +18,12 @@ class Game {
         let board = this.board = new Board(CONFIG.MAP_SIZE);
     }
 
+    setupSnake() {
+        let snake = this.snake = new Snake(this.board, 0, 0);
+    }
+
     loop() {
-        console.log('loop', this);
+        this.snake.update();
     }
 
     start() {
