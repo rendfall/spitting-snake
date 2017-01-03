@@ -24,11 +24,11 @@
             return this.map[i];
         }
 
-        emptyTile(x, y) {
+        resetTile(x, y) {
             this.setTile(x, y, TILES.EMPTY);
         }
 
-        setTile(x, y, value) {
+        putTile(x, y, value) {
             let i = this.getTileIndex(x, y);
             this.map[i] = value;
         }
