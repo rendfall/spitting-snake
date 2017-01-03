@@ -13,7 +13,7 @@
         }
 
         getTileIndex(x, y) {
-            return (this.size * (y - 1) + x);
+            return (this.size * y + x);
         }
 
         getTile(x, y) {
