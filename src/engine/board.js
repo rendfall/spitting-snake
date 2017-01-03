@@ -1,8 +1,5 @@
 (function (root) {
-
-    const TILES = {
-        EMPTY: 0
-    };
+    const { TILES } = CONSTANTS;
 
     class Board {
         constructor(size) {

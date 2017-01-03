@@ -1,4 +1,6 @@
 (function (root) {
+    const { TILES } = CONSTANTS; 
+
     class Snake {
         constructor(board, x, y) {
             this.board = board;
