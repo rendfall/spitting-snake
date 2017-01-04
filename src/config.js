@@ -1,4 +1,13 @@
 const CONFIG = {
-    INITIAL_SPEED: 1000,
-    MAP_SIZE: 20
+    MAP: {
+        SIZE: 20
+    },
+
+    GAME: {
+        SPEED: 1000
+    },
+
+    SNAKE: {
+        SIZE: 5
+    }
 };
