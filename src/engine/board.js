@@ -9,7 +9,7 @@
 
         createMap() {
             let length = (this.size ** 2);
-            this.map = Array.from({ length }, () => 0);
+            this.map = Array.from({ length }).fill(0);
         }
 
         getTileIndex(x, y) {
