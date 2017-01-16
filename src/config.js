@@ -8,6 +8,6 @@ const CONFIG = {
     },
 
     SNAKE: {
-        SIZE: 5
+        SIZE: 3
     }
 };
