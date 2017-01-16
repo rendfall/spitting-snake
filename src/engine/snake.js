@@ -6,19 +6,29 @@
         constructor(board, x, y) {
             this.board = board;
             this.direction = DIRECTIONS.RIGHT;
-            this.body = [];
+            this.body = this.createBody(x, y);
 
-            this.createBody(x, y);
+            this.spawn();
         }
 
         createBody(x, y) {
-            let size = SNAKE.SIZE;
+            let length = SNAKE.SIZE;
 
-            for (let i = size; i > 0; i--) {
-                this.addSegment(x - i, y);
+            return Array.from({ length }, (v, i) => {
+                return { x: x - i, y: y };
+            });
+        }
+
+        getSize() {
+            return this.body.length;
+        }
+
+        forEachSegment(fn) {
+            let size = this.getSize();
+
+            for (let i = 0; i < size; i++) {
+                 fn.call(fn, this.body[i], i);
             }
-
-            this.spawn();
         }
 
         addSegment(x, y) {
@@ -26,12 +36,14 @@
         }
 
         spawn() {
-            this.body.forEach((coords) => {
-                this.board.putTile(coords.x, coords.y, TILES.SNAKE);
+            this.forEachSegment((segment) => {
+                this.board.putTile(segment.x, segment.y, TILES.SNAKE);
             });
         }
 
-        update() {}
+        update() {
+
+        }
     }
 
     root.Snake = Snake;

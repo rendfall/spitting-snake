@@ -18,7 +18,7 @@
         }
 
         setupSnake() {
-            let snake = this.snake = new Snake(this.board, 10, 1);
+            let snake = this.snake = new Snake(this.board, 4, 4);
         }
 
         loop() {
