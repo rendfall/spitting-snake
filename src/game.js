@@ -54,6 +54,8 @@
             $root.innerHTML = '';
             $root.style.cssText = 'width:200px;height:200px';
 
+            board.putTile(9,4, 2);
+
             board.forEachTile((tile) => {
                 let $el = document.createElement('i');
 
