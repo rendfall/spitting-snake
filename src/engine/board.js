@@ -12,6 +12,22 @@
             this.map = Array.from({ length }).fill(0);
         }
 
+        getMap() {
+            return this.map;
+        }
+
+        forEachTile(fn) {
+            let a = this.size;
+
+            for (let y = 0; y < a; y++) {
+                for (let x = 0; x < a; x++) {
+                    let value = this.getTile(x, y);
+
+                    fn.call(fn, { x, y, value});
+                }
+            }
+        }
+
         getTileIndex(x, y) {
             return (this.size * y + x);
         }

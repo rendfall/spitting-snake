@@ -23,6 +23,8 @@
 
         loop() {
             this.snake.update();
+
+            this.debug();
         }
 
         start() {
@@ -44,11 +46,37 @@
         stop() {
             window.cancelAnimationFrame(this.loopID);
         }
+
+        debug() {
+            let { $root, board } = this;
+            let colors = ['white', 'red', 'green', 'yellow'];
+
+            $root.innerHTML = '';
+            $root.style.cssText = 'width:200px;height:200px';
+
+            board.forEachTile((tile) => {
+                let $el = document.createElement('i');
+
+                $el.setAttribute('style', [
+                    'display: block',
+                    'float: left',
+                    'border: 1px solid black',
+                    'background-color: ' + colors[tile.value],
+                    'width: 8px',
+                    'height: 8px'
+                ].join(';'));
+                $el.setAttribute('title', `${tile.x}, ${tile.y}`);
+
+                this.$root.appendChild($el);
+            });
+        }
     }
 
     root.Game = Game;
 })(window);
 
 document.addEventListener('DOMContentLoaded', () => {
-    new Game('content');
+    let $content = document.getElementById('content');
+
+    new Game($content);
 });
