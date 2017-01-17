@@ -18,13 +18,17 @@
         }
 
         setupSnake() {
-            let snake = this.snake = new Snake(this.board, 4, 4);
+            let snake = this.snake = new Snake(4, 4);
         }
 
         loop() {
+            this.board.clearMap();
+
             this.snake.update();
+            this.snake.render(this.board);
 
             this.debug();
+
         }
 
         start() {
@@ -53,8 +57,6 @@
 
             $root.innerHTML = '';
             $root.style.cssText = 'width:200px;height:200px';
-
-            board.putTile(9,4, 2);
 
             board.forEachTile((tile) => {
                 let $el = document.createElement('i');

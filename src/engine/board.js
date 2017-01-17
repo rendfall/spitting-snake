@@ -12,6 +12,10 @@
             this.map = Array.from({ length }).fill(0);
         }
 
+        clearMap() {
+            this.map.fill(0);
+        }
+
         getMap() {
             return this.map;
         }

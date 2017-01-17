@@ -3,12 +3,9 @@
     const { TILES, DIRECTIONS } = CONSTANTS; 
 
     class Snake {
-        constructor(board, x, y) {
-            this.board = board;
+        constructor(x, y) {
             this.direction = DIRECTIONS.RIGHT;
             this.body = this.createBody(x, y);
-
-            this.spawn();
         }
 
         createBody(x, y) {
@@ -17,12 +14,10 @@
             return Array.from({ length }, (v, i) => {
                 let _x = (x - i);
                 let _y = y;
-                let tile = this.board.getTile(_x, _y);
 
                 return { 
                     x: _x,
-                    y: _y, 
-                    tile: tile 
+                    y: _y
                 };
             });
         }
@@ -39,36 +34,26 @@
             }
         }
 
-        addSegment(x, y, tile) {
-            this.body.push({ x, y, tile });
-        }
-
-        spawn() {
-            this.forEachSegment((segment) => {
-                this.board.putTile(segment.x, segment.y, TILES.SNAKE);
-            });
+        addSegment(x, y) {
+            this.body.push({ x, y });
         }
 
         moveRight() {
             this.forEachSegment((segment, i) => {
-                let { x, y, tile } = this.body[i];
-                let _x = (x + 1);
-                let _y = y;
-
-                this.body[i] = { 
-                    x: _x,
-                    y: _y,
-                    tile
+                let { x, y } = segment;
+                this.body[i] = {
+                    x: x + 1,
+                    y: y
                 };
-
-                this.board.putTile(x, _y, tile);
-                this.board.putTile(_x, _y, TILES.SNAKE);
             });
 
-            let size = this.body.length;
-            let lastSegment = this.body[size - 1];
-            
-            this.board.putTile(lastSegment.x - 1, lastSegment.y, lastSegment.tile);
+        }
+
+        render(board) {
+            this.forEachSegment((segment, i) => {
+                let { x, y } = segment;
+                board.putTile(x, y, TILES.SNAKE);
+            });
         }
 
         move() {
@@ -91,7 +76,6 @@
                 case DOWN:
                     console.log('DOWN');
                     break;
-
             }
         }
 
