@@ -5,7 +5,7 @@
     class Game {
         constructor($root) {
             this.$root = $root;
-            this.speed = GAME.SPEED;
+            this.turnInterval = GAME.TURN_INTERVAL;
 
             this.setupBoard();
             this.setupSnake();
@@ -60,7 +60,7 @@
             (function step() {
                 let delta = (Date.now() - ts);
 
-                if (delta >= game.speed) {
+                if (delta >= game.turnInterval) {
                     ts = Date.now();
                     game.loop();
                 }

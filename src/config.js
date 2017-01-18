@@ -4,7 +4,7 @@ const CONFIG = {
     },
 
     GAME: {
-        SPEED: 1000
+        TURN_INTERVAL: 500 // ms
     },
 
     SNAKE: {
