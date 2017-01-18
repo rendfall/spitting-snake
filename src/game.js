@@ -23,20 +23,24 @@
         }
 
         setupKeyboard() {
-            window.addEventListener('keyup', (event) => {
+            window.addEventListener('keydown', (event) => {
                 let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
 
                 switch (event.keyCode) {
                     case 68: // d
+                    case 39: // left
                         this.snake.setDirection(RIGHT); break;
                     case 65: // a
+                    case 37: // right
                         this.snake.setDirection(LEFT); break;
                     case 83: // s
+                    case 40: // down
                         this.snake.setDirection(DOWN); break;
                     case 87: // w
+                    case 38: // up
                         this.snake.setDirection(UP); break;
                 }
-            });
+            }, false);
         }
 
         loop() {
