@@ -1,6 +1,6 @@
 (function (root) {
-
     const { MAP, GAME, SNAKE } = CONFIG;
+    const { DIRECTIONS } = CONSTANTS; 
 
     class Game {
         constructor($root) {
@@ -9,6 +9,7 @@
 
             this.setupBoard();
             this.setupSnake();
+            this.setupKeyboard();
 
             this.start();
         }
@@ -19,6 +20,23 @@
 
         setupSnake() {
             let snake = this.snake = new Snake(4, 4);
+        }
+
+        setupKeyboard() {
+            window.addEventListener('keyup', (event) => {
+                let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+
+                switch (event.keyCode) {
+                    case 68: // d
+                        this.snake.setDirection(RIGHT); break;
+                    case 65: // a
+                        this.snake.setDirection(LEFT); break;
+                    case 83: // s
+                        this.snake.setDirection(DOWN); break;
+                    case 87: // w
+                        this.snake.setDirection(UP); break;
+                }
+            });
         }
 
         loop() {

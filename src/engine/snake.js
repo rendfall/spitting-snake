@@ -42,6 +42,10 @@
             }
         }
 
+        setDirection(d) {
+            this.direction = d;
+        }
+
         render(board) {
             this.forEachSegment((segment, i) => {
                 let { x, y } = segment;
