@@ -12,12 +12,9 @@
             let length = SNAKE.SIZE;
 
             return Array.from({ length }, (v, i) => {
-                let _x = (x - i);
-                let _y = y;
-
                 return { 
-                    x: _x,
-                    y: _y
+                    x: (x - i),
+                    y: y
                 };
             });
         }
@@ -38,15 +35,11 @@
             this.body.push({ x, y });
         }
 
-        moveRight() {
-            this.forEachSegment((segment, i) => {
-                let { x, y } = segment;
-                this.body[i] = {
-                    x: x + 1,
-                    y: y
-                };
-            });
-
+        getSegment(i) {
+            return {
+                x: this.body[i].x,
+                y: this.body[i].y
+            }
         }
 
         render(board) {
@@ -57,26 +50,19 @@
         }
 
         move() {
-            let { LEFT, RIGHT, UP, DOWN } = DIRECTIONS;
-            let { direction, body } = this;
+            let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+            let { body, direction } = this;
+            let head = this.getSegment(0);
 
             switch (direction) {
-                case RIGHT:
-                    this.moveRight();
-                    break;
-
-                case LEFT:
-                    console.log('LEFT');
-                    break;
-
-                case UP:
-                    console.log('UP');
-                    break;
-
-                case DOWN:
-                    console.log('DOWN');
-                    break;
+                case RIGHT: head.x++; break;
+                case LEFT: head.x--; break;
+                case DOWN: head.y++; break;
+                case UP: head.y--; break;
             }
+            
+            body.pop();
+            body.unshift(head);
         }
 
         update() {

@@ -5,9 +5,9 @@ const CONSTANTS = {
     },
 
     DIRECTIONS: {
-        UP: 'n',
-        DONW: 's',
-        LEFT: 'w',
-        RIGHT: 'e'
+        UP: 'north',
+        DONW: 'south',
+        LEFT: 'west',
+        RIGHT: 'east'
     }
 };
