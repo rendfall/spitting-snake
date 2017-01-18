@@ -53,6 +53,10 @@
             });
         }
 
+        isMovingTo(d) {
+            return (this.direction === d);
+        }
+
         move() {
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
             let { body, direction } = this;
