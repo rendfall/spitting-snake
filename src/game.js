@@ -48,6 +48,9 @@
                         if (!snake.isMovingTo(DOWN))
                             snake.setDirection(UP);
                         break;
+                    case 27:
+                        this.pause();
+                        break;
                 }
             }, false);
         }
@@ -78,8 +81,9 @@
             })();
         }
 
-        stop() {
+        pause() {
             window.cancelAnimationFrame(this.loopID);
+            console.log('Pausing...');
         }
 
         debug() {
@@ -100,7 +104,7 @@
                     'width: 8px',
                     'height: 8px'
                 ].join(';'));
-                $el.setAttribute('title', `${tile.x}, ${tile.y}`);
+                $el.setAttribute('title', `[${tile.x}, ${tile.y}]: ${tile.value}`);
 
                 this.$root.appendChild($el);
             });
