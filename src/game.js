@@ -23,7 +23,7 @@
         }
 
         setupKeyboard() {
-            window.addEventListener('keydown', (event) => {
+            root.addEventListener('keydown', (event) => {
                 let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
                 let { snake } = this;
 
@@ -56,13 +56,14 @@
         }
 
         loop() {
-            this.board.clearMap();
+            let { board, snake } = this;
+            
+            board.clearMap();
 
-            this.snake.update();
-            this.snake.render(this.board);
+            snake.update();
+            snake.render(this.board);
 
             this.debug();
-
         }
 
         start() {
@@ -77,12 +78,12 @@
                     game.loop();
                 }
 
-                game.loopID = window.requestAnimationFrame(step);
+                game.loopID = root.requestAnimationFrame(step);
             })();
         }
 
         pause() {
-            window.cancelAnimationFrame(this.loopID);
+            root.cancelAnimationFrame(this.loopID);
             console.log('Pausing...');
         }
 
