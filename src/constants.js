@@ -1,7 +1,8 @@
 const CONSTANTS = {
     TILES: {
         EMPTY: 0,
-        SNAKE: 1
+        SNAKE: 1,
+        FOOD: 2
     },
 
     DIRECTIONS: {

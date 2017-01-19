@@ -1,11 +1,12 @@
 (function (root) {
     const { MAP, GAME, SNAKE } = CONFIG;
-    const { DIRECTIONS } = CONSTANTS; 
+    const { DIRECTIONS, TILES } = CONSTANTS; 
 
     class Game {
-        constructor($root) {
-            this.$root = $root;
+        constructor($world) {
+            this.$world = $world;
             this.turnInterval = GAME.TURN_INTERVAL;
+            this.isEnded = false;
 
             this.setupBoard();
             this.setupSnake();
@@ -57,10 +58,19 @@
 
         loop() {
             let { board, snake } = this;
-            
-            board.clearMap();
 
-            snake.update();
+            // Snake turn
+            let head = snake.getHead();
+            let { x, y } = snake.getNextMove();
+            let tile = board.getTile(x, y);
+
+            switch (tile) {
+                case TILES.SNAKE: this.end(); break;
+                case TILES.EMPTY: snake.moveTo(x, y); break;
+                case TILES.FOOD: snake.eat(); snake.moveTo(x, y); break;
+            }
+
+            board.clearMap();
             snake.render(this.board);
 
             this.debug();
@@ -71,6 +81,10 @@
             let game = this;
 
             (function step() {
+                if (game.isEnded) {
+                    return alert('Game Over');
+                }
+
                 let delta = (Date.now() - ts);
 
                 if (delta >= game.turnInterval) {
@@ -87,12 +101,16 @@
             console.log('Pausing...');
         }
 
+        end() {
+            this.isEnded = true;
+        }
+
         debug() {
-            let { $root, board } = this;
+            let { $world, board } = this;
             let colors = ['white', 'red', 'green', 'yellow'];
 
-            $root.innerHTML = '';
-            $root.style.cssText = 'width:200px;height:200px';
+            $world.innerHTML = '';
+            $world.style.cssText = 'width:200px;height:200px';
 
             board.forEachTile((tile) => {
                 let $el = document.createElement('i');
@@ -107,7 +125,7 @@
                 ].join(';'));
                 $el.setAttribute('title', `[${tile.x}, ${tile.y}]: ${tile.value}`);
 
-                this.$root.appendChild($el);
+                this.$world.appendChild($el);
             });
         }
     }
@@ -116,7 +134,7 @@
 })(window);
 
 document.addEventListener('DOMContentLoaded', () => {
-    let $content = document.getElementById('content');
+    let $world = document.getElementById('world');
 
-    new Game($content);
+    new Game($world);
 });

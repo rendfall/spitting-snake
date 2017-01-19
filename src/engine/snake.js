@@ -6,6 +6,7 @@
         constructor(x, y) {
             this.direction = DIRECTIONS.RIGHT;
             this.body = this.createBody(x, y);
+            this.isEating = false;
         }
 
         createBody(x, y) {
@@ -35,6 +36,14 @@
             this.body.push({ x, y });
         }
 
+        getHead() {
+            return this.getSegment(0);
+        }
+
+        getTail() {
+            return this.body.reverse()[0];
+        }
+
         getSegment(i) {
             return {
                 x: this.body[i].x,
@@ -57,24 +66,35 @@
             return (this.direction === d);
         }
 
-        move() {
+        getNextMove() {
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
             let { body, direction } = this;
-            let head = this.getSegment(0);
+            let { x, y } = this.getHead();
 
             switch (direction) {
-                case RIGHT: head.x++; break;
-                case LEFT: head.x--; break;
-                case DOWN: head.y++; break;
-                case UP: head.y--; break;
+                case RIGHT: x++; break;
+                case LEFT: x--; break;
+                case DOWN: y++; break;
+                case UP: y--; break;
             }
-            
-            body.pop();
-            body.unshift(head);
+
+            return { x, y };
         }
 
-        update() {
-            this.move();
+        moveTo(x, y) {
+            let { body } = this;
+
+            if (this.isEating) {
+                this.isEating = false;
+            } else {
+                body.pop();
+            }
+
+            body.unshift({ x, y });
+        }
+
+        eat() {
+            this.isEating = true;
         }
     }
 
