@@ -41,7 +41,7 @@
         }
 
         getTail() {
-            return this.body.reverse()[0];
+            return this.body.slice(-1)[0];
         }
 
         getSegment(i) {
