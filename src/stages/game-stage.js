@@ -10,6 +10,8 @@
             let { snake, board, food } = this.game;
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
 
+            board.clearMap();
+
             let { x, y } = snake.getHead();
             let nextBody = snake.body.slice();
 

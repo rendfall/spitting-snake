@@ -54,13 +54,6 @@
             this.direction = d;
         }
 
-        render(board) {
-            this.forEachSegment((segment, i) => {
-                let { x, y } = segment;
-                board.putTile(x, y, TILES.SNAKE);
-            });
-        }
-
         isMovingTo(d) {
             return (this.direction === d);
         }
