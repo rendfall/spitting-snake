@@ -104,16 +104,11 @@
         }
 
         debug() {
-            let { $world, board, snake } = this;
+            let { $world, board } = this;
             let colors = ['white', 'red', 'green', 'yellow'];
 
             $world.innerHTML = '';
             $world.style.cssText = 'width:200px;height:200px';
-
-            snake.forEachSegment((segment, i) => {
-                let { x, y } = segment;
-                board.putTile(x, y, TILES.SNAKE);
-            });
 
             board.forEachTile((tile) => {
                 let $el = document.createElement('i');

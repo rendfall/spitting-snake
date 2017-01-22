@@ -27,8 +27,17 @@
             }
 
             nextBody.unshift({ x, y });
-
             snake.body = nextBody;
+
+            food.pool.forEach((f) => {
+                let { x, y } = f;
+                board.putTile(x, y, TILES.FOOD);
+            });
+
+            snake.forEachSegment((segment, i) => {
+                let { x, y } = segment;
+                board.putTile(x, y, TILES.SNAKE);
+            });
         }
     }
 
