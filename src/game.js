@@ -1,6 +1,6 @@
 (function (root) {
     const { MAP, GAME, SNAKE } = CONFIG;
-    const { DIRECTIONS, TILES } = CONSTANTS; 
+    const { DIRECTIONS, TILES } = CONSTANTS;
 
     class Game {
         constructor($world) {
@@ -8,15 +8,25 @@
             this.turnInterval = GAME.TURN_INTERVAL;
             this.isEnded = false;
 
+            this.setupStage();
             this.setupBoard();
+            this.setupFood();
             this.setupSnake();
             this.setupKeyboard();
 
             this.start();
         }
 
+        setupStage() {
+            this.stage = new GameStage(this);
+        }
+
         setupBoard() {
             let board = this.board = new Board(MAP.SIZE);
+        }
+
+        setupFood() {
+            let food = this.food = new Food();
         }
 
         setupSnake() {
@@ -57,20 +67,13 @@
         }
 
         loop() {
-            let { board, snake } = this;
-
-            // Snake turn
-            let head = snake.getHead();
-            let { x, y } = snake.getNextMove();
-            let tile = board.getTile(x, y);
-
-            switch (tile) {
-                case TILES.SNAKE: this.end(); break;
-                case TILES.EMPTY: snake.moveTo(x, y); break;
-                case TILES.FOOD: snake.eat(); snake.moveTo(x, y); break;
-            }
+            let { board, food, snake, stage } = this;
+            let { STAGES } = GAME;
 
             board.clearMap();
+
+            stage.update();
+
             snake.render(this.board);
 
             this.debug();

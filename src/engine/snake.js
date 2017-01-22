@@ -6,7 +6,6 @@
         constructor(x, y) {
             this.direction = DIRECTIONS.RIGHT;
             this.body = this.createBody(x, y);
-            this.isEating = false;
         }
 
         createBody(x, y) {
@@ -64,37 +63,6 @@
 
         isMovingTo(d) {
             return (this.direction === d);
-        }
-
-        getNextMove() {
-            let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
-            let { body, direction } = this;
-            let { x, y } = this.getHead();
-
-            switch (direction) {
-                case RIGHT: x++; break;
-                case LEFT: x--; break;
-                case DOWN: y++; break;
-                case UP: y--; break;
-            }
-
-            return { x, y };
-        }
-
-        moveTo(x, y) {
-            let { body } = this;
-
-            if (this.isEating) {
-                this.isEating = false;
-            } else {
-                body.pop();
-            }
-
-            body.unshift({ x, y });
-        }
-
-        eat() {
-            this.isEating = true;
         }
     }
 
