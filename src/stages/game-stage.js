@@ -22,12 +22,17 @@
                 case UP: y--; break;
             }
 
-            if (!food.isFood(x, y)) {
+            if (food.isFood(x, y)) {
+                food.remove(x, y);
+            } else {
                 nextBody.pop();
             }
 
             nextBody.unshift({ x, y });
             snake.body = nextBody;
+
+            let emptyTiles = board.getTilesByType(0);
+            food.refreshPool(emptyTiles);
 
             food.pool.forEach((f) => {
                 let { x, y } = f;

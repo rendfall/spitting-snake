@@ -4,33 +4,33 @@
 
     class Food {
         constructor() {
-            this.pool = this.createPool();
+            this.pool = [];
         }
 
-        createPool() {
-            let length = FOOD.MAX - 1;
-
-            return Array.from({ length }, (v, i) => {
-                return this.getRandomPosition();
-            });
-        }
-
-        refillPool() {
-            let length = FOOD.MAX - this.pool.length - 1;
-
-            for (let i = 0; i < length; i++) {
-                let pos = this.getRandomPosition();
+        generatePool(slots, count) {
+            for (let i = 0; i < count; i++) {
+                let pos = this.shuffle(slots).pop();
                 this.pool.push(pos);
             }
+
+            return this.pool;
         }
 
-        getRandomPosition() {
-            let max = MAP.SIZE;
-            let r = Math.random;
-            let x = r() * max |0;
-            let y = r() * max |0;
+        refreshPool(slots) {
+            let count = FOOD.MAX - this.pool.length;
+            this.generatePool(slots, count);
+        }
 
-            return { x, y };
+        shuffle(arr) {
+            return arr.slice().sort(() => (0.5 - Math.random()));
+        }
+
+        remove(x, y) {
+            let idx = this.pool.findIndex((f) => {
+                return (f.x === x && f.y === y);
+            });
+
+            this.pool.splice(idx, 1);
         }
 
         isFood(x, y) {

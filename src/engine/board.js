@@ -20,6 +20,18 @@
             return this.map;
         }
 
+        getTilesByType(type) {
+            let group = [];
+
+            this.forEachTile((tile) => {
+                if (tile.value === type) {
+                    group.push(tile);
+                }
+            });
+
+            return group;
+        }
+
         forEachTile(fn) {
             let a = this.size;
 
@@ -41,7 +53,7 @@
             return this.map[i];
         }
 
-        resetTile(x, y) {
+        clearTile(x, y) {
             this.setTile(x, y, TILES.EMPTY);
         }
 

@@ -17,6 +17,6 @@ const CONFIG = {
     },
 
     FOOD: {
-        MAX: 10
+        MAX: 3
     }
 };
