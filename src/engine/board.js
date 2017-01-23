@@ -20,6 +20,11 @@
             return this.map;
         }
 
+        isOutOfBounds(x, y) {
+            let max = this.size - 1;
+            return (x > max || y > max) || (x < 0 || y < 0);
+        }
+
         getTilesByType(type) {
             let group = [];
 

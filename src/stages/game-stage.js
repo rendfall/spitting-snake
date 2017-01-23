@@ -9,9 +9,6 @@
         update() {
             let { snake, board, food } = this.game;
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
-
-            board.clearMap();
-
             let { x, y } = snake.getHead();
             let nextBody = snake.body.slice();
 
@@ -20,6 +17,16 @@
                 case LEFT: x--; break;
                 case DOWN: y++; break;
                 case UP: y--; break;
+            }
+
+            if (board.isOutOfBounds(x, y)) {
+                return this.game.end();
+            }
+
+            let nextTile = board.getTile(x, y);
+
+            if (nextTile === TILES.SNAKE) {
+                return this.game.end();
             }
 
             if (food.isFood(x, y)) {
@@ -33,6 +40,8 @@
 
             let emptyTiles = board.getTilesByType(0);
             food.refreshPool(emptyTiles);
+
+            board.clearMap();
 
             food.pool.forEach((f) => {
                 let { x, y } = f;
