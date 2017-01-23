@@ -1,9 +1,19 @@
 (function (root) {
     const { TILES, DIRECTIONS } = CONSTANTS;
+    const { GAME } = CONFIG;
 
     class GameStage {
         constructor(game) {
             this.game = game;
+            this.speed = this.game.turnInterval;
+        }
+
+        increaseSpeed() {
+            let { speed, game } = this;
+
+            this.speed = speed - (speed * GAME.SPEED_MULTIPIER);
+            game.turnInterval = this.speed;
+            console.log(this.speed);
         }
 
         snakeUpdate() {
@@ -31,6 +41,8 @@
 
             if (food.isFood(x, y)) {
                 food.remove(x, y);
+                this.speedLevel++;
+                this.increaseSpeed();
             } else {
                 nextBody.pop();
             }
@@ -56,7 +68,9 @@
         }
 
         update() {
-            this.board.clearMap();
+            let { board } = this.game;
+
+            board.clearMap();
 
             this.snakeUpdate();
             this.foodUpdate();

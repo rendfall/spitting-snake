@@ -9,7 +9,10 @@ const CONFIG = {
             GAME: 'game',
             END: 'end'
         },
-        TURN_INTERVAL: 500 // ms
+
+        TURN_INTERVAL: 500, // ms
+
+        SPEED_MULTIPIER: 0.2
     },
 
     SNAKE: {
