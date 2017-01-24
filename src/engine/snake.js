@@ -57,6 +57,13 @@
         isMovingTo(d) {
             return (this.direction === d);
         }
+
+        isSnake(x, y) {
+            let founded = this.body.filter((item) => {
+                return (item.x === x && item.y === y);
+            });
+            return (founded.length > 0);
+        }
     }
 
     root.Snake = Snake;

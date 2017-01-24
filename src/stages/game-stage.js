@@ -6,6 +6,41 @@
         constructor(game) {
             this.game = game;
             this.speed = this.game.turnInterval;
+
+            this.setupKeyboard();
+        }
+
+        setupKeyboard() {
+            root.addEventListener('keydown', (event) => {
+                let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+                let { snake } = this.game;
+
+                switch (event.keyCode) {
+                    case 68: // d
+                    case 39: // left
+                        if (!snake.isMovingTo(LEFT))
+                            snake.setDirection(RIGHT);
+                        break;
+                    case 65: // a
+                    case 37: // right
+                        if (!snake.isMovingTo(RIGHT))
+                            snake.setDirection(LEFT);
+                        break;
+                    case 83: // s
+                    case 40: // down
+                        if (!snake.isMovingTo(UP))
+                            snake.setDirection(DOWN);
+                        break;
+                    case 87: // w
+                    case 38: // up
+                        if (!snake.isMovingTo(DOWN))
+                            snake.setDirection(UP);
+                        break;
+                    case 27:
+                        this.game.pause();
+                        break;
+                }
+            }, false);
         }
 
         increaseSpeed() {
@@ -35,7 +70,7 @@
 
             let nextTile = board.getTile(x, y);
 
-            if (nextTile === TILES.SNAKE) {
+            if (snake.isSnake(x, y)) {
                 return this.game.end();
             }
 
