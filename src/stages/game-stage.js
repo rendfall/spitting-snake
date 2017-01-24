@@ -6,6 +6,7 @@
         constructor(game) {
             this.game = game;
             this.speed = this.game.turnInterval;
+            this.requestedDirection = null;
 
             this.setupKeyboard();
         }
@@ -13,34 +14,40 @@
         setupKeyboard() {
             root.addEventListener('keydown', (event) => {
                 let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
-                let { snake } = this.game;
 
                 switch (event.keyCode) {
                     case 68: // d
-                    case 39: // left
-                        if (!snake.isMovingTo(LEFT))
-                            snake.setDirection(RIGHT);
+                    case 39: // right
+                        this.requestedDirection = RIGHT;
                         break;
                     case 65: // a
-                    case 37: // right
-                        if (!snake.isMovingTo(RIGHT))
-                            snake.setDirection(LEFT);
+                    case 37: // left
+                        this.requestedDirection = LEFT;
                         break;
                     case 83: // s
                     case 40: // down
-                        if (!snake.isMovingTo(UP))
-                            snake.setDirection(DOWN);
+                        this.requestedDirection = DOWN;
                         break;
                     case 87: // w
                     case 38: // up
-                        if (!snake.isMovingTo(DOWN))
-                            snake.setDirection(UP);
+                        this.requestedDirection = UP;
                         break;
                     case 27:
                         this.game.pause();
                         break;
                 }
             }, false);
+        }
+
+        canSnakeChangeDirection() {
+            let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+            let direction = this.game.snake.direction;
+            let requested = this.requestedDirection;
+
+            return (requested === RIGHT && direction !== LEFT) ||
+                (requested === LEFT && direction !== RIGHT) ||
+                (requested === UP && direction !== DOWN) ||
+                (requested === DOWN && direction !== UP);
         }
 
         increaseSpeed() {
@@ -56,6 +63,10 @@
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
             let { x, y } = snake.getHead();
             let nextBody = snake.body.slice();
+
+            if (this.canSnakeChangeDirection()) {
+                snake.direction = this.requestedDirection;
+            }
 
             switch (snake.direction) {
                 case RIGHT: x++; break;
@@ -83,7 +94,7 @@
             }
 
             nextBody.unshift({ x, y });
-            snake.body = nextBody;
+            snake.setBody(nextBody);
 
             snake.forEachSegment((segment, i) => {
                 let { x, y } = segment;

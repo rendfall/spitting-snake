@@ -4,7 +4,7 @@
 
     class Snake {
         constructor(x, y) {
-            this.direction = DIRECTIONS.RIGHT;
+            this.direction = this.trail = DIRECTIONS.RIGHT;
             this.body = this.createBody(x, y);
         }
 
@@ -54,8 +54,9 @@
             this.direction = d;
         }
 
-        isMovingTo(d) {
-            return (this.direction === d);
+        setBody(body) {
+            this.body = body;
+            this.trail = this.direction;
         }
 
         isSnake(x, y) {

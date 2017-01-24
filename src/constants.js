@@ -7,7 +7,7 @@ const CONSTANTS = {
 
     DIRECTIONS: {
         UP: 'north',
-        DONW: 'south',
+        DOWN: 'south',
         LEFT: 'west',
         RIGHT: 'east'
     }
