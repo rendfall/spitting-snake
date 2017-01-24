@@ -19,7 +19,7 @@ const CONFIG = {
         SIZE: 6
     },
 
-    FOOD: {
+    PICKUPS: {
         MAX: 3
     }
 };

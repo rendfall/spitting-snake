@@ -1,8 +1,8 @@
 (function (root) {
-    const { FOOD, MAP } = CONFIG;
+    const { PICKUPS, MAP } = CONFIG;
     const { TILES, DIRECTIONS } = CONSTANTS; 
 
-    class Food {
+    class Pickups {
         constructor() {
             this.pool = [];
         }
@@ -17,7 +17,7 @@
         }
 
         refreshPool(slots) {
-            let count = FOOD.MAX - this.pool.length;
+            let count = PICKUPS.MAX - this.pool.length;
             this.generatePool(slots, count);
         }
 
@@ -26,20 +26,20 @@
         }
 
         remove(x, y) {
-            let idx = this.pool.findIndex((f) => {
-                return (f.x === x && f.y === y);
+            let idx = this.pool.findIndex((item) => {
+                return (item.x === x && item.y === y);
             });
 
             this.pool.splice(idx, 1);
         }
 
-        isFood(x, y) {
-            let founded = this.pool.filter((food) => {
-                return (food.x === x && food.y === y);
+        isPickup(x, y) {
+            let founded = this.pool.filter((item) => {
+                return (item.x === x && item.y === y);
             });
             return (founded.length > 0);
         }
     }
 
-    root.Food = Food;
+    root.Pickups = Pickups;
 })(window);

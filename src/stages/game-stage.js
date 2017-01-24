@@ -17,7 +17,7 @@
         }
 
         snakeUpdate() {
-            let { snake, board, food } = this.game;
+            let { snake, board, pickups } = this.game;
             let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
             let { x, y } = snake.getHead();
             let nextBody = snake.body.slice();
@@ -39,8 +39,8 @@
                 return this.game.end();
             }
 
-            if (food.isFood(x, y)) {
-                food.remove(x, y);
+            if (pickups.isPickup(x, y)) {
+                pickups.remove(x, y);
                 this.speedLevel++;
                 this.increaseSpeed();
             } else {
@@ -56,14 +56,14 @@
             });
         }
 
-        foodUpdate() {
-            let { board, food } = this.game;
+        pickupsUpdate() {
+            let { board, pickups } = this.game;
             let emptyTiles = board.getTilesByType(0);
-            food.refreshPool(emptyTiles);
+            pickups.refreshPool(emptyTiles);
 
-            food.pool.forEach((f) => {
-                let { x, y } = f;
-                board.putTile(x, y, TILES.FOOD);
+            pickups.pool.forEach((item) => {
+                let { x, y } = item;
+                board.putTile(x, y, TILES.PICKUPS);
             });
         }
 
@@ -73,7 +73,7 @@
             board.clearMap();
 
             this.snakeUpdate();
-            this.foodUpdate();
+            this.pickupsUpdate();
         }
     }
 

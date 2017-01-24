@@ -10,7 +10,7 @@
 
             this.setupStage();
             this.setupBoard();
-            this.setupFood();
+            this.setupPickups();
             this.setupSnake();
             this.setupKeyboard();
 
@@ -25,8 +25,8 @@
             let board = this.board = new Board(MAP.SIZE);
         }
 
-        setupFood() {
-            let food = this.food = new Food();
+        setupPickups() {
+            let pickups = this.pickups = new Pickups();
         }
 
         setupSnake() {
