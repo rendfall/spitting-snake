@@ -8,6 +8,8 @@
             this.speed = this.game.turnInterval;
             this.requestedDirection = null;
 
+            this.level = 1;
+
             this.setupKeyboard();
         }
 
@@ -53,7 +55,9 @@
         increaseSpeed() {
             let { speed, game } = this;
 
-            this.speed = speed - (speed * GAME.SPEED_MULTIPIER);
+            this.level++;
+            this.speed = (1 / this.level * 500) + 50;
+
             game.turnInterval = this.speed;
             console.log(this.speed);
         }
