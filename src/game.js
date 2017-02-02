@@ -9,6 +9,7 @@
             this.isEnded = false;
 
             this.setupStage();
+            this.setupRenderer();
             this.setupBoard();
             this.setupPickups();
             this.setupSnake();
@@ -30,6 +31,10 @@
 
         setupSnake() {
             let snake = this.snake = new Snake(4, 4);
+        }
+
+        setupRenderer() {
+            let renderer = this.renderer = new Renderer(this);
         }
 
         loop() {
@@ -70,27 +75,12 @@
         }
 
         debug() {
-            let { $world, board } = this;
-            let colors = ['white', 'red', 'green', 'yellow'];
+            let { $world, renderer } = this;
 
             $world.innerHTML = '';
             $world.style.cssText = 'width:200px;height:200px';
 
-            board.forEachTile((tile) => {
-                let $el = document.createElement('i');
-
-                $el.setAttribute('style', [
-                    'display: block',
-                    'float: left',
-                    'border: 1px solid black',
-                    'background-color: ' + colors[tile.value],
-                    'width: 8px',
-                    'height: 8px'
-                ].join(';'));
-                $el.setAttribute('title', `[${tile.x}, ${tile.y}]: ${tile.value}`);
-
-                this.$world.appendChild($el);
-            });
+            renderer.render();
         }
     }
 
