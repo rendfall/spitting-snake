@@ -2,6 +2,12 @@
     const { TILES, DIRECTIONS } = CONSTANTS;
     const { GAME } = CONFIG;
 
+    const AUDIO = {
+        music: './src/assets/music.mp3',
+        pickups: './src/assets/pickup.mp3',
+        gameOver: './src/assets/die.mp3'
+    };
+
     class GameStage {
         constructor(game) {
             this.game = game;
@@ -10,7 +16,19 @@
 
             this.level = 1;
 
+            this.setupMusic();
+            this.setupSounds();
             this.setupKeyboard();
+        }
+
+        setupMusic() {
+            this.music = new AudioElement();
+            this.music.setVolume(0.5);
+            this.music.play(AUDIO.music, true);
+        }
+
+        setupSounds() {
+            this.sounds = new AudioElement();
         }
 
         setupKeyboard() {
@@ -35,7 +53,7 @@
                         this.requestedDirection = UP;
                         break;
                     case 27:
-                        this.game.pause();
+                        this.gameOver();
                         break;
                 }
             }, false);
@@ -80,19 +98,20 @@
             }
 
             if (board.isOutOfBounds(x, y)) {
-                return this.game.end();
+                return this.gameOver();
             }
 
             let nextTile = board.getTile(x, y);
 
             if (snake.isSnake(x, y)) {
-                return this.game.end();
+                return this.gameOver();
             }
 
             if (pickups.isPickup(x, y)) {
                 pickups.remove(x, y);
                 this.speedLevel++;
                 this.increaseSpeed();
+                this.sounds.play(AUDIO.pickups, false);
             } else {
                 nextBody.pop();
             }
@@ -124,6 +143,12 @@
 
             this.snakeUpdate();
             this.pickupsUpdate();
+        }
+
+        gameOver() {
+            this.music.pause();
+            this.sounds.play(AUDIO.gameOver);
+            this.game.end();
         }
     }
 

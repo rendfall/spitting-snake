@@ -38,11 +38,11 @@
         }
 
         loop() {
-            let { stage } = this;
+            let { stage, renderer } = this;
 
             stage.update();
 
-            this.debug();
+            renderer.render();
         }
 
         start() {
@@ -72,15 +72,6 @@
 
         end() {
             this.isEnded = true;
-        }
-
-        debug() {
-            let { $world, renderer } = this;
-
-            $world.innerHTML = '';
-            $world.style.cssText = 'width:200px;height:200px';
-
-            renderer.render();
         }
     }
 
