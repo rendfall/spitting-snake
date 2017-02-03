@@ -4,6 +4,7 @@
 
     const AUDIO = {
         music: './src/assets/music.mp3',
+        pause: './src/assets/pause.mp3',
         pickups: './src/assets/pickup.mp3',
         gameOver: './src/assets/die.mp3'
     };
@@ -57,6 +58,13 @@
                         break;
                 }
             }, false);
+
+            window.addEventListener('blur', (event) => {
+                this.gamePause();
+            });
+            window.addEventListener('focus', (event) => {
+                this.gameResume();
+            });
         }
 
         canSnakeChangeDirection() {
@@ -143,6 +151,18 @@
 
             this.snakeUpdate();
             this.pickupsUpdate();
+        }
+
+        gameResume() {
+            this.game.start();
+            this.music.setVolume(0.5);
+            this.music.play(AUDIO.music);
+        }
+
+        gamePause() {
+            this.game.pause();
+            this.music.setVolume(0.2);
+            this.music.play(AUDIO.pause);
         }
 
         gameOver() {
