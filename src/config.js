@@ -5,9 +5,9 @@ const CONFIG = {
 
     GAME: {
         STAGES: {
-            MENU: 'menu',
-            GAME: 'game',
-            END: 'end'
+            MENU: 'MenuStage',
+            GAME: 'GameStage',
+            END: 'EndStage'
         },
 
         TURN_INTERVAL: 500, // ms

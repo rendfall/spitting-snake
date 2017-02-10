@@ -7,9 +7,10 @@
             this.$world = $world;
             this.turnInterval = GAME.TURN_INTERVAL;
             this.isEnded = false;
+            this.stageManager = new StageManager(this);
 
-            this.setupStage();
             this.setupRenderer();
+            this.setupStages();
             this.setupBoard();
             this.setupPickups();
             this.setupSnake();
@@ -17,8 +18,19 @@
             this.start();
         }
 
-        setupStage() {
-            this.stage = new GameStage(this);
+        setupRenderer() {
+            let renderer = this.renderer = new Renderer(this);
+        }
+
+        setupStages() {
+            const { STAGES } = GAME;
+            let { stageManager } = this;
+
+            stageManager.add(STAGES.GAME);
+            stageManager.add(STAGES.MENU);
+            stageManager.add(STAGES.END);
+
+            stageManager.go(STAGES.GAME);
         }
 
         setupBoard() {
@@ -33,15 +45,9 @@
             let snake = this.snake = new Snake(4, 4);
         }
 
-        setupRenderer() {
-            let renderer = this.renderer = new Renderer(this);
-        }
-
         loop() {
-            let { stage, renderer } = this;
-
-            stage.update();
-
+            let { stageManager, renderer } = this;
+            stageManager.getActive().update();
             renderer.render();
         }
 
@@ -51,7 +57,7 @@
 
             (function step() {
                 if (game.isEnded) {
-                    return alert('Game Over');
+                    return console.log('Game Over');
                 }
 
                 let delta = (Date.now() - ts);

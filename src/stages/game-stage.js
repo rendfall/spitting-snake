@@ -9,8 +9,10 @@
         gameOver: './src/assets/die.mp3'
     };
 
-    class GameStage {
+    class GameStage extends Stage {
         constructor(game) {
+            super(game);
+
             this.game = game;
             this.speed = this.game.turnInterval;
             this.requestedDirection = null;
@@ -156,13 +158,13 @@
         gameResume() {
             this.game.start();
             this.music.setVolume(0.5);
-            this.music.play(AUDIO.music);
+            this.music.play(AUDIO.music, true);
         }
 
         gamePause() {
             this.game.pause();
             this.music.setVolume(0.2);
-            this.music.play(AUDIO.pause);
+            this.music.play(AUDIO.pause, true);
         }
 
         gameOver() {

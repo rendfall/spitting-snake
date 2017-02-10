@@ -18,7 +18,7 @@
             this.getElement().volume = value;
         }
 
-        play(src, type = 'audio/mpeg', loop = false) {
+        play(src, loop = false) {
             let $el = this.getElement();
 
             $el.addEventListener('canplaythrough', () => {
