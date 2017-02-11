@@ -35,31 +35,22 @@
         }
 
         setupKeyboard() {
-            root.addEventListener('keydown', (event) => {
-                let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+            let { RIGHT, LEFT, DOWN, UP } = DIRECTIONS;
+            let { keyboard } = this.game;
 
-                switch (event.keyCode) {
-                    case 68: // d
-                    case 39: // right
-                        this.requestedDirection = RIGHT;
-                        break;
-                    case 65: // a
-                    case 37: // left
-                        this.requestedDirection = LEFT;
-                        break;
-                    case 83: // s
-                    case 40: // down
-                        this.requestedDirection = DOWN;
-                        break;
-                    case 87: // w
-                    case 38: // up
-                        this.requestedDirection = UP;
-                        break;
-                    case 27:
-                        this.gameOver();
-                        break;
-                }
-            }, false);
+            keyboard.on('RIGHT', () => this.requestedDirection = RIGHT);
+            keyboard.on('d', () => this.requestedDirection = RIGHT);
+
+            keyboard.on('LEFT', () => this.requestedDirection = LEFT);
+            keyboard.on('a', () => this.requestedDirection = LEFT);
+
+            keyboard.on('DOWN', () => this.requestedDirection = DOWN);
+            keyboard.on('s', () => this.requestedDirection = DOWN);
+
+            keyboard.on('UP', () => this.requestedDirection = UP);
+            keyboard.on('w', () => this.requestedDirection = UP);
+
+            keyboard.on('ESC', () => this.gameOver());
 
             window.addEventListener('blur', (event) => {
                 this.gamePause();

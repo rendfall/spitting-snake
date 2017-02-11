@@ -7,6 +7,7 @@
             this.$world = $world;
             this.turnInterval = GAME.TURN_INTERVAL;
             this.isEnded = false;
+            this.keyboard = new Keyboard();
             this.stageManager = new StageManager(this);
 
             this.setupRenderer();
