@@ -10,6 +10,12 @@ const CONFIG = {
             END: 'EndStage'
         },
 
+        SCREENS: {
+            MENU: 'MenuScreen',
+            GAME: 'GameScreen',
+            END: 'EndScreen'
+        },
+
         TURN_INTERVAL: 500, // ms
 
         SPEED_MULTIPIER: 0.2

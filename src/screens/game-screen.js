@@ -1,10 +1,9 @@
 (function (root) {
     const { MAP, GAME, SNAKE } = CONFIG;
-    const { DIRECTIONS, TILES } = CONSTANTS;
 
-    function createElement(name, obj) {
+    function createElement(name, styles) {
         let $el = document.createElement('i');
-        Object.assign($el.style, obj);
+        Object.assign($el.style, styles);
         return $el;
     }
 
@@ -16,7 +15,7 @@
         height: '8px'
     });
 
-    class Renderer {
+    class GameScreen {
         constructor(game) {
             this.game = game;
         }
@@ -25,7 +24,6 @@
             let { board, $world } = this.game;
             let colors = ['white', 'red', 'green', 'yellow'];
 
-            $world.innerHTML = '';
             $world.style.width = '200px';
             $world.style.height = '200px';
 
@@ -38,5 +36,5 @@
         }
     }
 
-    root.Renderer = Renderer;
+    root.GameScreen = GameScreen;
 })(window);

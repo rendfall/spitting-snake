@@ -10,8 +10,8 @@
     };
 
     class GameStage extends Stage {
-        constructor(game) {
-            super(game);
+        constructor(game, name) {
+            super(game, name);
 
             this.game = game;
             this.speed = this.game.turnInterval;

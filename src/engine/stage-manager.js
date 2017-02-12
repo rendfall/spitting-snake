@@ -1,12 +1,11 @@
 (function (root) {
     const { STAGES } = CONFIG.GAME;
-    const INIT_STAGE = STAGES.GAME;
 
     class StageManager {
         constructor(game) {
             this.game = game;
             this.stages = new Map();
-            this.active;
+            this.active = null;
         }
 
         add(name) {
@@ -16,7 +15,7 @@
                 throw new Error(`There is no such Stage as ${name}`);
             }
 
-            let stage = new stageConstructor(this.game);
+            let stage = new stageConstructor(this.game, name);
             this.stages.set(name, stage);
         }
 

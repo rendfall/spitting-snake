@@ -8,6 +8,7 @@
             this.turnInterval = GAME.TURN_INTERVAL;
             this.isEnded = false;
             this.keyboard = new Keyboard();
+            this.renderer = new Renderer(this);
             this.stageManager = new StageManager(this);
 
             this.setupRenderer();
@@ -20,7 +21,12 @@
         }
 
         setupRenderer() {
-            let renderer = this.renderer = new Renderer(this);
+            const { SCREENS } = GAME;
+            let { renderer } = this;
+
+            renderer.addScreen(SCREENS.GAME);
+            renderer.addScreen(SCREENS.MENU);
+            renderer.addScreen(SCREENS.END);
         }
 
         setupStages() {
@@ -35,21 +41,23 @@
         }
 
         setupBoard() {
-            let board = this.board = new Board(MAP.SIZE);
+            this.board = new Board(MAP.SIZE);
         }
 
         setupPickups() {
-            let pickups = this.pickups = new Pickups();
+            this.pickups = new Pickups();
         }
 
         setupSnake() {
-            let snake = this.snake = new Snake(4, 4);
+            this.snake = new Snake(4, 4);
         }
 
         loop() {
             let { stageManager, renderer } = this;
-            stageManager.getActive().update();
-            renderer.render();
+            let activeStage = stageManager.getActive();
+
+            activeStage.update();
+            renderer.render(activeStage);
         }
 
         start() {
