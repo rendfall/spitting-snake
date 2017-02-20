@@ -8,6 +8,9 @@
         getName() {
             return this.name;
         }
+
+        open() {}
+        close() {}
     }
 
     root.Stage = Stage;

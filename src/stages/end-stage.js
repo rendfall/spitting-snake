@@ -4,8 +4,11 @@
             super(game, name);
         }
 
+        open() {
+            console.log('GameOver');
+        }
+
         update() {
-            console.log('EndStage');
         }
     }
 

@@ -12,11 +12,12 @@
     class GameStage extends Stage {
         constructor(game, name) {
             super(game, name);
-
             this.game = game;
+        }
+
+        open() {
             this.speed = this.game.turnInterval;
             this.requestedDirection = null;
-
             this.level = 1;
 
             this.setupMusic();
@@ -161,7 +162,7 @@
         gameOver() {
             this.music.pause();
             this.sounds.play(AUDIO.gameOver);
-            this.game.end();
+            this.game.stageManager.go('EndStage');
         }
     }
 

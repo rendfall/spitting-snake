@@ -7,7 +7,6 @@
 
         setup() {
             $audio.type = type;
-            
         }
 
         getElement() {

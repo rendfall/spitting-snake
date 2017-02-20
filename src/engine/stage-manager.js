@@ -33,8 +33,16 @@
 
         go(name) {
             this.reset();
-            let stage = this.get(name);
-            this.active = stage;
+            let oldStage = this.active;
+
+            if (oldStage) {
+                oldStage.close();
+            }
+
+            let newStage = this.get(name);
+            newStage.open();
+
+            this.active = newStage;
         }
     }
 
