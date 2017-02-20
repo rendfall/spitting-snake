@@ -1,7 +1,7 @@
 (function (root) {
     class EndStage extends Stage {
-        constructor(game) {
-            super(game);
+        constructor(game, name) {
+            super(game, name);
         }
 
         update() {

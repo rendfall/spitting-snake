@@ -1,11 +1,19 @@
 (function (root) {
     class MenuStage extends Stage {
-        constructor(game) {
-            super(game);
+        constructor(game, name) {
+            super(game, name);
+
+            this.game.keyboard.on('UP', () => {
+                console.log('UP');
+            })
+
+            this.game.keyboard.on('ENTER', () => {
+                this.game.stateManager.go('GameStage');
+            });
         }
 
         update() {
-            console.log('MenuStage');
+            // console.log('MenuStage');
         }
     }
 

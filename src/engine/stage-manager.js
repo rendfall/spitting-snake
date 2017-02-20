@@ -27,7 +27,12 @@
             return this.active;
         }
 
+        reset() {
+            this.game.keyboard.reset();
+        }
+
         go(name) {
+            this.reset();
             let stage = this.get(name);
             this.active = stage;
         }

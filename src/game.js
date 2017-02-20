@@ -37,7 +37,7 @@
             stageManager.add(STAGES.MENU);
             stageManager.add(STAGES.END);
 
-            stageManager.go(STAGES.GAME);
+            stageManager.go(STAGES.MENU);
         }
 
         setupBoard() {

@@ -28,10 +28,14 @@
             this.keyBindings.set(name.toUpperCase(), fn);
         }
 
-        remove() {
+        reset() {
             this.listeners.forEach((fn, name) => {
                 root.removeEventListener(name, fn);
-            })
+            });
+            this.listeners = new Map();
+            this.keyBindings = new Map();
+
+            this.setupListeners();
         }
 
         static getKey(code) {
