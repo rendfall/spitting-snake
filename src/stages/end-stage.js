@@ -7,10 +7,9 @@
     class EndStage extends Stage {
         constructor(game, name) {
             super(game, name);
-
+            this.score = 0;
             this.setupMusic();
             this.setupSounds();
-            this.setupFocus();
         }
 
         setupMusic() {
@@ -31,15 +30,18 @@
             });
         }
 
-        open() {
+        open(params) {
             let { music, sounds } = this;
+
+            this.score = params.score;
+            this.setupFocus();
 
             sounds.onEnded(() => {
                 music.play(AUDIO.end, true);
             });
 
             sounds.play(AUDIO.gameOver);
-            console.log('GameOver');
+            console.log(`GameOver. Your score is: ${params.score}`);
         }
 
         update() {

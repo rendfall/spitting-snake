@@ -9,8 +9,8 @@
             return this.name;
         }
 
-        open() {}
-        close() {}
+        open(params) {}
+        close(params) {}
     }
 
     root.Stage = Stage;

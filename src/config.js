@@ -1,6 +1,7 @@
 const CONFIG = {
     MAP: {
-        SIZE: 20
+        SIZE: 20,
+        TILE_SIZE: 12 // px
     },
 
     GAME: {
@@ -26,6 +27,7 @@ const CONFIG = {
     },
 
     PICKUPS: {
-        MAX: 3
+        MAX: 3,
+        POINTS: 20
     }
 };

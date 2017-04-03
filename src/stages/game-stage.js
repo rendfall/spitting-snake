@@ -1,6 +1,6 @@
 (function (root) {
     const { TILES, DIRECTIONS } = CONSTANTS;
-    const { GAME } = CONFIG;
+    const { GAME, PICKUPS } = CONFIG;
 
     const AUDIO = {
         music: './src/assets/music.mp3',
@@ -12,13 +12,13 @@
         constructor(game, name) {
             super(game, name);
             this.game = game;
-            this.events = {};
         }
 
         open() {
             this.speed = this.game.turnInterval;
             this.requestedDirection = null;
             this.level = 1;
+            this.score = 0;
 
             this.setupMusic();
             this.setupSounds();
@@ -74,6 +74,8 @@
             let { speed, game } = this;
 
             this.level++;
+            this.score += (PICKUPS.POINTS * this.level);
+
             this.speed = (1 / this.level * 500) + 50;
 
             game.turnInterval = this.speed;
@@ -156,8 +158,9 @@
         }
 
         gameOver() {
+            let { score } = this;
             this.music.pause();
-            this.game.stageManager.go('EndStage');
+            this.game.stageManager.go('EndStage', { score });
         }
     }
 

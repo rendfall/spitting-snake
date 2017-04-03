@@ -9,9 +9,12 @@
         tile: createElement('i', { 
             display: 'block',
             float: 'left',
-            border: '1px solid #ddd',
-            width: '8px',
-            height: '8px'
+            outline: '1px solid #ddd'
+        }),
+
+        score: createElement('i', {
+            display: 'block',
+            fontSize: '24px'
         }),
 
         menuItem: createElement('i', { 

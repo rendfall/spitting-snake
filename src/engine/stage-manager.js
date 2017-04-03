@@ -31,7 +31,7 @@
             this.game.keyboard.reset();
         }
 
-        go(name) {
+        go(name, params = {}) {
             let oldStage = this.active;
 
             if (oldStage) {
@@ -41,7 +41,7 @@
             this.reset();
 
             let newStage = this.get(name);
-            newStage.open();
+            newStage.open(params);
 
             this.active = newStage;
         }
