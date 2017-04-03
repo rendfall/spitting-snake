@@ -20,6 +20,10 @@
         play(src, loop = false) {
             let $el = this.getElement();
 
+            if (!src && this.isReady()) {
+                return void $el.play();
+            }
+
             $el.addEventListener('canplaythrough', () => {
                 $el.play();
             }, false);
@@ -38,6 +42,10 @@
 
         destroy() {
             this.$element.remove();
+        }
+
+        isReady() {
+            return (this.$element.readyState === 4);
         }
     }
 

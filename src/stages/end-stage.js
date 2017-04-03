@@ -10,6 +10,7 @@
 
             this.setupMusic();
             this.setupSounds();
+            this.setupFocus();
         }
 
         setupMusic() {
@@ -19,6 +20,15 @@
 
         setupSounds() {
             this.sounds = new AudioElement();
+        }
+
+        setupFocus() {
+            root.addEventListener('blur', (event) => {
+                this.music.pause();
+            });
+            root.addEventListener('focus', (event) => {
+                this.music.play();
+            });
         }
 
         open() {
