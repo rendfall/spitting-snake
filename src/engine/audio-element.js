@@ -21,15 +21,23 @@
             let $el = this.getElement();
 
             $el.addEventListener('canplaythrough', () => {
-                $el.play();    
+                $el.play();
             }, false);
 
             $el.src = src;
             $el.loop = loop;
         }
 
+        onEnded(cb) {
+            this.$element.addEventListener('ended', cb);
+        }
+
         pause() {
             this.getElement().pause();
+        }
+
+        destroy() {
+            this.$element.remove();
         }
     }
 

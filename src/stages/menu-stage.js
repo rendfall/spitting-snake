@@ -9,10 +9,6 @@
         open() {
             let { game } = this;
 
-            game.keyboard.on('UP', () => {
-                console.log('UP');
-            });
-
             game.keyboard.on('ENTER', () => {
                 game.stageManager.go(STAGES.GAME);
             });

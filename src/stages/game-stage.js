@@ -5,14 +5,14 @@
     const AUDIO = {
         music: './src/assets/music.mp3',
         pause: './src/assets/pause.mp3',
-        pickups: './src/assets/pickup.mp3',
-        gameOver: './src/assets/die.mp3'
+        pickups: './src/assets/pickup.mp3'
     };
 
     class GameStage extends Stage {
         constructor(game, name) {
             super(game, name);
             this.game = game;
+            this.events = {};
         }
 
         open() {
@@ -23,6 +23,11 @@
             this.setupMusic();
             this.setupSounds();
             this.setupKeyboard();
+        }
+
+        close() {
+            this.music.destroy();
+            this.sounds.destroy();
         }
 
         setupMusic() {
@@ -52,13 +57,6 @@
             keyboard.on('w', () => this.requestedDirection = UP);
 
             keyboard.on('ESC', () => this.gameOver());
-
-            window.addEventListener('blur', (event) => {
-                this.gamePause();
-            });
-            window.addEventListener('focus', (event) => {
-                this.gameResume();
-            });
         }
 
         canSnakeChangeDirection() {
@@ -79,7 +77,6 @@
             this.speed = (1 / this.level * 500) + 50;
 
             game.turnInterval = this.speed;
-            console.log(this.speed);
         }
 
         snakeUpdate() {
@@ -156,12 +153,10 @@
         gamePause() {
             this.game.pause();
             this.music.setVolume(0.2);
-            this.music.play(AUDIO.pause, true);
         }
 
         gameOver() {
             this.music.pause();
-            this.sounds.play(AUDIO.gameOver);
             this.game.stageManager.go('EndStage');
         }
     }

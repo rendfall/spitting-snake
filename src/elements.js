@@ -16,12 +16,12 @@
 
         menuItem: createElement('i', { 
             display: 'block',
-            float: 'left',
             width: '100px',
             textAlign: 'center',
             padding: '10px 0',
-            height: '30px',
-            border: '1px solid #ddd'
+            height: '20px',
+            border: '1px solid #ddd',
+            cursor: 'pointer'
         })
     };
 
