@@ -8,3 +8,13 @@
 * No webpack, gulp, browserify, etc.
 * Vanilla JS
 * Playable ;)
+
+## Demo
+
+[play](https://rendfall.github.io/spitting-snake/)
+
+![](./screenshot.png)
+
+## Requirements
+
+* Browser with mostly ES2016+ Support (Recommended: Google Chrome)
